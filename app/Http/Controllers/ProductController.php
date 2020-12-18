@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -10,22 +14,26 @@ class ProductController extends Controller
     
     public function index()
     {
-        return Product::all();
+        // como aquí tenemos que devolver Product::all()
+        // y eso es una collection hacemos lo siguiente.
+        // return ProductResource::collection(Product::all());
+        // como nos hemos creado un ProductCollection lo usamos ahora
+        return new ProductCollection(Product::all());
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
         return $product;
-         
     }
 
     public function show(Product $product)
     {
+        $product = new ProductResource($product);
         return $product;  
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         $product->update($request->all());
     }
