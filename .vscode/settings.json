@@ -1,0 +1,10 @@
+{
+   "sqltools.connections": [
+      {
+         "previewLimit": 50,
+         "driver": "SQLite",
+         "name": "Laravel",
+         "database": "${workspaceFolder:queues-laravel}/database/database.sqlite"
+      }
+   ]
+}
