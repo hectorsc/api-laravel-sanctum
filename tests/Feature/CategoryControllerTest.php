@@ -32,7 +32,7 @@ class CategoryControllerTest extends TestCase
 
         $response->assertSuccessful();
         // $response->assertHeader('content-type', 'application/json');
-        $response->assertJsonCount(5);
+        $response->assertJsonCount(5, 'data');
     }
 
     public function test_create_new_category()
@@ -41,6 +41,8 @@ class CategoryControllerTest extends TestCase
             'name' => 'Hola'
         ];
         $response = $this->postJson('/api/categories', $data);
+
+        $response->dump();
 
         $response->assertSuccessful();
         // $response->assertHeader('content-type', 'application/json');

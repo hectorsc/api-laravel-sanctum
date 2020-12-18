@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return Category::all();
+        return new CategoryCollection(Category::all());
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         $category = Category::create($request->all());
         return $category;
@@ -20,10 +23,11 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
+        $category = new CategoryResource($category);
         return $category;
     }
 
-    public function update(Request $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->all());
     }
