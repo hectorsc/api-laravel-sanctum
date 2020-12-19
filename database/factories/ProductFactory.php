@@ -8,6 +8,16 @@ use Faker\Generator as Faker;
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'price' => $faker->numberBetween(10000, 60000)
+        'price' => $faker->numberBetween(10000, 60000),
+        // creamos una funcion anónima y donde vamos a retornar
+        // una categoria de la base de datos que la traemos al azar
+        // y nos quedamos la primera que obtengamos asi cuando creamos
+        // el producto le asignamos una categoria aleatoria
+        'category_id' => function () {
+            return \App\Category::query()->inRandomOrder()->first()->id;
+        },
+        'created_by' => function () {
+            return \App\User::query()->inRandomOrder()->first()->id;
+        }
     ];
 });
