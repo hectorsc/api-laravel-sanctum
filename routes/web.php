@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// habilitamos la verificacion de rutas con verify
+// para verificar las rutas necesarias de correo electronico
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
