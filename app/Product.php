@@ -2,10 +2,15 @@
 
 namespace App;
 
+use App\Utils\CanBeRated;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    //añadimos nuestro trait para indicar que el product 
+    // puede ser calificado
+    use CanBeRated;
+
     protected $guarded = [];
 
     public function category() 
