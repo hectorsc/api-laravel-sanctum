@@ -18,8 +18,8 @@ class UserTokenController extends Controller
         ]);
 
         $user = User::where('email', $request->get('email'))->first();
-
-        if (!$user && !Hash::check($request->password, $user->password)) {
+        
+        if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => 'El email no exite o no coincide con nuestros datos'
             ]);

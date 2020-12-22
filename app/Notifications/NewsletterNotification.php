@@ -41,7 +41,7 @@ class NewsletterNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
+                    ->line('Esto es el welcome de Newsletter.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
