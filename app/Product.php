@@ -24,4 +24,18 @@ class Product extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // esto es un evento de eloquent
+    // LO MOVEMOS A UN OBSERVER
+    // protected static function booted()
+    // {
+    //     // se ejecuta antes de crearse la entidad que en este caso es producto
+    //     static::creating(function (Product $product) {
+    //         $faker = \Faker\Factory::create();
+    //         $product->image_url = $faker->imageUrl();
+    //         // cada vez que se crea un producto se le asigna el usuario que está logeado
+    //         $product->createdBy()->associate(auth()->user());
+    //     });
+    // }
+
 }
