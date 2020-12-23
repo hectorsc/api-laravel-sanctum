@@ -2,6 +2,8 @@
 
 namespace App\Utils;
 
+use App\Events\ModelRated;
+
 // creamos un trait para darselo a todos los modelos que puedan calificar
 trait CanRate
 {
@@ -45,6 +47,9 @@ trait CanRate
          'score' => $score,
          'rateable_type' => get_class($model)
       ]);
+
+      // evento para cada vez que se califique una entidad
+      event(new ModelRated($this, $model, $score ));
 
       return true;
    }
