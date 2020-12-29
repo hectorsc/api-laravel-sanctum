@@ -36,6 +36,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+        // dd($exception);
         parent::report($exception);
     }
 
@@ -50,6 +51,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        return response()->json($exception->getMessage());
+        // return parent::render($request, $exception);
     }
 }
