@@ -23,4 +23,11 @@ Route::resource('categories', 'CategoryController')->middleware('auth:sanctum');
 
 Route::post('sanctum/token', 'UserTokenController');
 
-Route::post('/newsletter', 'NewsletterController@send');
+Route::middleware(['auth:sanctum'])->group(function () {
+    
+    Route::post('/newsletter', 'NewsletterController@send');
+    Route::post('products/{product}/rate', 'ProductRatingController@rate');
+    Route::post('products/{product}/unrate', 'ProductRatingController@unrate');
+    Route::post("rating/{rating}/approve", "ProductRatingController@approve");
+    Route::get("rating", "ProductRatingController@list");
+});

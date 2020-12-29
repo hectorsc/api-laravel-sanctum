@@ -54,6 +54,20 @@ trait CanRate
       return true;
    }
 
+   public function unrate(Model $model): bool
+   {
+      if (!$this->hasRated($model)) {
+         return false;
+      }
+
+      $this->ratings($model->getMorphClass())->detach($model->getKey());
+
+      // disparamos evento cada vez que se descalifica una entidad
+      event(new ModelUnrated($this, $model));
+
+      return true;
+   }
+
    public function hasRated (Model $model)
    {
       // si es nulo la relacion de ratings del modelo que le pasamos con el id

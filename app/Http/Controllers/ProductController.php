@@ -7,10 +7,13 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware("auth:sanctum")->except(["index", "show"]);
+    // }
     
     public function index()
     {

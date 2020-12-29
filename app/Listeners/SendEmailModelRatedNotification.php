@@ -38,7 +38,7 @@ class SendEmailModelRatedNotification implements ShouldQueue
                 $rateable->name, //nombre del producto
                 $event->getScore()
             );
-            // al user que creo el producto calificado le 
+            // al user que creó el producto calificado le 
             // mandamos la notificacion
             $rateable->createdBy->notify($notification);
         }
