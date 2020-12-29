@@ -3,6 +3,8 @@
 namespace App\Utils;
 
 use App\Events\ModelRated;
+use App\Events\ModelUnrated;
+use App\Exceptions\InvalidScore;
 
 // creamos un trait para darselo a todos los modelos que puedan calificar
 trait CanRate
@@ -40,6 +42,15 @@ trait CanRate
       // para no calificar dos veces al mismo modelo
       if ($this->hasRated($model)) {
          return false;
+      }
+
+      // llamamos al archivo de configuracion
+      $from = config('rating.from');
+      $to = config('rating.to');
+
+      // lanzamos una exception personalizada 
+      if ($score < $from || $score > $to) {
+         throw new InvalidScore($from, $to);
       }
 
       // llamamos a la relacion y guardamos en la tabla
