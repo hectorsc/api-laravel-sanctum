@@ -66,6 +66,15 @@ class Handler extends ExceptionHandler
         // metodo render y no tener que estar lanzando todas las exceptin
         // desde este archivo
 
+        if ($request->expectsJson()) {
+            dd('no me está entrando por aquí');
+            return response()->json([
+                'error' => $exception->getMessage()
+            ]);
+
+            # code...
+        }
+
         return parent::render($request, $exception);
     }
 }

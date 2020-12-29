@@ -26,3 +26,9 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+// creamos un state que nos permite dar caracteristicas propias a los
+// factories. se llama admin y cuando se utiliza el campo is_admin se pone a true
+$factory->state(App\User::class, 'admin', [
+    'is_admin' => true
+]);
