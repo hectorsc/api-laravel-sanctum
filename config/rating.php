@@ -7,5 +7,7 @@ return [
       'rating' => \App\Rating::class
    ],
    'from' => 1,
-   'to' => 5
+   'to' => 5,
+   // esto no se muy bien para que se añade
+   'required_approval' => true,
 ];

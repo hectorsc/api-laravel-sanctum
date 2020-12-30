@@ -31,9 +31,11 @@ class ProductRatingController extends Controller
         return new ProductResource($product);
     }
 
+    // definimos el metodo para aprobar
     public function approve(Rating $rating)
     {
-        Gate::authorize("admin", $rating);
+        // para utilizar la politica que acabamos de crear
+        Gate::authorize('admin', $rating);
 
         $rating->approve();
         $rating->save();
@@ -41,16 +43,23 @@ class ProductRatingController extends Controller
         return response()->json();
     }
 
+    // para que el admin pueda probar cada uno
+    // de los recursos creamos un listado
     public function list(Request $request)
     {
-        Gate::authorize("admin");
+        Gate::authorize('admin');
+        // consultamos los rating
         $builder = Rating::query();
 
-        if ($request->has("approved"))
-        $builder->whereNotNull("approved_at");
+        // con el campo creado dentro de la config
+        // si tenemos approved
+        //para probar esto en postman la ruta sería .../api/rating?approved=true
+        if ($request->has('approved'))
+        $builder->whereNotNull('approved_at');
 
-        if ($request->has("notApproved"))
-        $builder->whereNull("approved_at");
+        // en este caso la ruta en postman sería .../api/rating?notApproved=true
+        if ($request->has('notApproved'))
+        $builder->whereNull('approved_at');
 
         return RatingResource::collection($builder->get());
     }

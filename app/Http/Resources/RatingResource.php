@@ -12,6 +12,9 @@ class RatingResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
+    // creamos este recurso para los datos que va a devolver 
+    // la peticion
     public function toArray($request)
     {
         return [

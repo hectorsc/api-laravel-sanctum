@@ -28,8 +28,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/newsletter', 'NewsletterController@send');
     Route::post('products/{product}/rate', 'ProductRatingController@rate');
     Route::post('products/{product}/unrate', 'ProductRatingController@unrate');
-    Route::post("rating/{rating}/approve", "ProductRatingController@approve");
-    Route::get("rating", "ProductRatingController@list");
+    // declaramos la ruta approve
+    Route::post('rating/{rating}/approve', 'ProductRatingController@approve');
+    // ruta para listar los productos y solo lo puede hacer el amdin
+    Route::get('rating', 'ProductRatingController@list');
 });
 
 Route::get('/server-error', function () {
