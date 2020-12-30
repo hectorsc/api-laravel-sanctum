@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        // registramos nuestro service provider
+        App\Providers\RatingProvider::class
 
     ],
 
